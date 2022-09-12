@@ -3,25 +3,26 @@ import justpy as jp
 
 @jp.SetRoute("/home")                                       # use decorator OR jp.Route()
 def home():                                                 # request handler
-    wp = jp.WebPage()                                       # web page
-    jp.Div(                                                 # html element attached to web page
-        a=wp,
-        text='Hello World!',
-        classes="text-green-600 bg-yellow-500 "              # https://tailwindcss.com/docs
-                "font-serif text-lg"
-    )
+    wp = jp.WebPage()
 
-    jp.Div(a=wp, text='Hello Again!')
+    div = jp.Div(a=wp,                                      # main div, belongs to webpage
+                 classes='bg-gray-500 h-screen')            # gray, takes entire screen
+
+    jp.Input(a=div, placeholder="Enter first value",        # input, belongs to div
+             classes='form-input')
+
+    jp.Input(a=div, placeholder="Enter second value",       # input, belongs to div
+             classes='form-input')
+
+    jp.Div(a=div, text="Result goes here...",               # sub-div, belongs to div
+           classes='text-gray-600')
+
+    jp.Button(a=div, text='Calculate',                      # button, belongs to div
+              classes='border border-blue-500 m-2 p-2 '     # border, spacing, padding
+                      'px-4 rounded text-blue-600 '
+                      'hover:bg-red-500 '                   # mouse-over event
+                      'hover:text-white')
     return wp                                               # must return page
 
-
-def about():                                                # request handler
-    wp = jp.WebPage()                                       # web page
-    jp.Div(a=wp, text='Hello Fab!')                         # html element attached to web page
-    jp.Div(a=wp, text='Hello Again!')
-    return wp                                               # must return page
-
-
-jp.Route("/about", about)                                   # use jp.Route() OR decorator
 
 jp.justpy()
