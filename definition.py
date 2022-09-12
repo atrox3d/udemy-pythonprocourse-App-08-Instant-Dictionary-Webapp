@@ -7,7 +7,9 @@ class Definition:
 
     def get(self):
         df = pandas.read_csv('data.csv')
-        definition = tuple(df.loc[df['word'] == self.term]['definition'])
+        definition = tuple(
+            df.loc[df['word'] == self.term]['definition']
+        )
         return definition
 
 
