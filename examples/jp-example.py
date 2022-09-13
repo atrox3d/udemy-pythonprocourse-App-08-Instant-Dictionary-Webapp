@@ -62,24 +62,31 @@ def home():                                                     # request handle
                         'hover:bg-red-500 '                     # mouse-over event
                         'hover:text-white'
     )
-    jp.Div(
+
+    # fab = None
+    interactive = jp.Div(
             a=footer_div,
             text='I am a cool interactive div!',
             classes='hover:bg-red-500',
             mouseenter=mouse_enter,                             # mouse enter event
-            mouseleave=mouse_leave                              # mouse leave event
+            mouseleave=mouse_leave,                             # mouse leave event
+            # fab=fab
     )
+    fab = jp.Img(a=footer_div, src='/static/flying-fab2.jpeg')
+    interactive.fab = fab
     return wp                                                   # must return page
 
 
 def mouse_enter(widget, msg):                                   # div mouse enter handler
     print('mouse enter!')
     widget.text = 'a mouse entered the house'                   # change widget (Div) text
+    widget.fab.src = '/static/flying-fab1.jpeg'
 
 
 def mouse_leave(widget, msg):                                   # div mouse enter handler
     print('mouse leave!')
     widget.text = 'the mouse left'                              # change widget (Div) text
+    widget.fab.src = '/static/flying-fab2.jpeg'
 
 
 def sum_up(widget, msg):                                        # buttton click handler
@@ -90,5 +97,6 @@ def sum_up(widget, msg):                                        # buttton click 
     )
     print(f'setting div result sum: {sum}')
     widget.result.text = sum                                    # change widget (div) attribute text
+
 
 jp.justpy()
