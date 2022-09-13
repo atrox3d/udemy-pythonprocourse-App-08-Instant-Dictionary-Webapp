@@ -4,15 +4,16 @@ import justpy as jp
 class Dictionary:
     path = '/dictionary'
 
-    def serve(self):
+    @classmethod
+    def serve(cls, request):
         wp = jp.QuasarPage(tailwind=True)                                       # enable tailwind css support
         div = jp.Div(a=wp, classes='bg-gray-200 h-screen')
         jp.Div(a=div, text='Instant English Dictionary', classes='text-4xl m-2')
 
         jp.Div(
                 a=div,
-               text='Get the definition of any English word instantly as you type.',
-               classes='text-large'
+                text='Get the definition of any English word instantly as you type.',
+                classes='text-large'
         )
         jp.Input(
                 a=div, placeholder='Type in a word here...',
@@ -33,6 +34,8 @@ class Dictionary:
                 classes='m-2 p-2 text-lg border-2 h-40 '
                         'border-gray-300 '
         )
+
+        print(cls, request)
         return wp
 
 

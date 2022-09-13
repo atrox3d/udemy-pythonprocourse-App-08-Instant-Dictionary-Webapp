@@ -4,7 +4,8 @@ import justpy as jp
 class Home:
     path = '/'
 
-    def serve(self):
+    @classmethod
+    def serve(cls, request):
         wp = jp.QuasarPage(tailwind=True)                                       # enable tailwind css support
 
         div = jp.Div(
