@@ -25,34 +25,28 @@ class Dictionary:
                 classes='text-large'
         )
         input_div = jp.Div(a=div, classes='grid grid-cols-2')
-        input_box = jp.Input(
-                a=input_div, placeholder='Type in a word here...',
-                classes='m-2 '                                                  # margin 2
-                        'bg-gray-100 '                                          # gray backgroud
-                        'border-2 '                                             # border 2
-                        'border-gray-200 '                                      # gray border
-                        'rounded '                                              # round borders
-                        'w-64 '                                                 # 64 chars width?
-                        'focus:bg-white '
-                        'focus:outline-none '                                   # no outline when out of focus
-                        'focus:border-purple-500 '                              # purple outline when in focus
-                        'py-2 '                                                 # padding
-                        'px-4 '
-        )
         output_div = jp.Div(
                 a=div,
                 classes='m-2 p-2 text-lg border-2 h-40 '
                         'border-gray-300 '
         )
-
-        jp.Button(
-                    a=input_div, text="Get Definition",
-                    classes='border-2 border-black '
-                            'rounded text-gray-500 ',
-                    click=cls.get_definition,                                   # click static handler
-                    outputdiv=output_div,                                       # where to write on click
-                    inputbox=input_box                                          # where to read from on click
+        input_box = jp.Input(
+            a=input_div, placeholder='Type in a word here...',
+            classes='m-2 '  # margin 2
+                    'bg-gray-100 '  # gray backgroud
+                    'border-2 '  # border 2
+                    'border-gray-200 '  # gray border
+                    'rounded '  # round borders
+                    'w-64 '  # 64 chars width?
+                    'focus:bg-white '
+                    'focus:outline-none '  # no outline when out of focus
+                    'focus:border-purple-500 '  # purple outline when in focus
+                    'py-2 '  # padding
+                    'px-4 ',
+            outputdiv=output_div,  # where to write on click
         )
+        input_box.on('input', cls.get_definition)
+
         # print(cls, request)
         return wp
 
@@ -64,7 +58,7 @@ class Dictionary:
     """
     @staticmethod
     def get_definition(widget, msg):                                            # button click handler
-        defined = definition.Definition(widget.inputbox.value)                  # get definition of input box
+        defined = definition.Definition(widget.value)                           # get definition of input box
         widget.outputdiv.text = " | ".join(defined.get())                       # write definition on output div
 
 
