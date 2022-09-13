@@ -1,4 +1,5 @@
 import justpy as jp
+import definition
 
 
 class Dictionary:
@@ -24,7 +25,7 @@ class Dictionary:
                 classes='text-large'
         )
         input_div = jp.Div(a=div, classes='grid grid-cols-2')
-        jp.Input(
+        input_box = jp.Input(
                 a=input_div, placeholder='Type in a word here...',
                 classes='m-2 '                                                  # margin 2
                         'bg-gray-100 '                                          # gray backgroud
@@ -48,8 +49,9 @@ class Dictionary:
                     a=input_div, text="Get Definition",
                     classes='border-2 border-black '
                             'rounded text-gray-500 ',
-                    click=cls.get_definition,
-                    outputdiv=output_div
+                    click=cls.get_definition,                                   # click static handler
+                    outputdiv=output_div,                                       # where to write on click
+                    inputbox=input_box                                          # where to read from on click
         )
         # print(cls, request)
         return wp
@@ -61,12 +63,9 @@ class Dictionary:
     Either way it doesnt work so we need to use @staticmethod to treat the method as a function
     """
     @staticmethod
-    def get_definition(widget, msg):
-        print(widget)
-        print(msg)
-        widget.outputdiv.text = "hello"
+    def get_definition(widget, msg):                                            # button click handler
+        defined = definition.Definition(widget.inputbox.value)                  # get definition of input box
+        widget.outputdiv.text = " | ".join(defined.get())                       # write definition on output div
 
 
-# jp.Route(Home.path, Home.serve)
-# jp.justpy(port=8001)
 
