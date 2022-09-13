@@ -64,15 +64,31 @@ def home():                                                     # request handle
     )
     jp.Div(
             a=footer_div,
-            text='I am a cool interactive div!'
+            text='I am a cool interactive div!',
+            classes='hover:bg-red-500',
+            mouseenter=mouse_enter,                             # mouse enter event
+            mouseleave=mouse_leave                              # mouse leave event
     )
     return wp                                                   # must return page
 
 
-def sum_up(widget, msg):
+def mouse_enter(widget, msg):                                   # div mouse enter handler
+    print('mouse enter!')
+    widget.text = 'a mouse entered the house'                   # change widget (Div) text
+
+
+def mouse_leave(widget, msg):                                   # div mouse enter handler
+    print('mouse leave!')
+    widget.text = 'the mouse left'                              # change widget (Div) text
+
+
+def sum_up(widget, msg):                                        # buttton click handler
     print(f"{widget.text} clicked!")
-    sum = float(widget.input1.value or 0) + float(widget.input2.value or 0)
+    sum = (
+            float(widget.input1.value or 0) +                   # get widget (input) attribute text
+            float(widget.input2.value or 0)                     # get widget (input) attribute text
+    )
     print(f'setting div result sum: {sum}')
-    widget.result.text = sum
+    widget.result.text = sum                                    # change widget (div) attribute text
 
 jp.justpy()
