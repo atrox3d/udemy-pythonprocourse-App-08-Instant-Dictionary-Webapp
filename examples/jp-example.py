@@ -3,7 +3,9 @@ import justpy as jp
 
 @jp.SetRoute("/home")                                           # use decorator OR jp.Route()
 def home():                                                     # request handler
-    wp = jp.WebPage()
+    wp = jp.QuasarPage(                                         # https://quasar.dev/
+        tailwind=True                                           # enable tailwind css support
+    )                                                           # https://tailwindcss.com/
 
     main_div = jp.Div(                                          # main div
                         a=wp,                                   # belongs to webpage
@@ -49,13 +51,17 @@ def home():                                                     # request handle
                         a=main_div,                             # belongs to main div
                         classes='grid grid-cols-2 gap-4'        # another grid
     )
-    jp.Button(                                                  # button
+    jp.QBtn(                                                    # button
                 a=footer_div,                                   # belongs to footer div
-                text='Calculate',                               # button caption
+                text='Calculate',                               # button caption: tailwind, clashes with label of quasar
                 click=sum_up,                                   # on click function
 
                 input1=input1, input2=input2,                   # add the two inputs as attributes
                 result=result,                                  # add the result div as attribute
+
+                color='secondary',
+                label='primary',                                # button caption: quasar, clashes with label of tailwind
+                icon='map',
 
                 classes='border border-blue-500 m-2 p-2 '       # border, spacing, padding
                         'px-4 rounded text-blue-600 '             
@@ -90,5 +96,6 @@ def sum_up(widget, msg):                                        # buttton click 
     )
     print(f'setting div result sum: {sum}')
     widget.result.text = sum                                    # change widget (div) attribute text
+
 
 jp.justpy()
