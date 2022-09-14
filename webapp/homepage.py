@@ -35,9 +35,10 @@ class Home:
         )                                                                       # |           |
         jp.QBtn(                                                                # |           +- button
                 a=toolbar,                                                      # |           |
-                dense=True, flat=True, round=True, icon="menu",                 # |           |
-                click=cls.move_drawer,                                          # |           |
-                drawer=drawer                                                   # |           |
+                dense=True, flat=True, round=True,                              # |           |
+                icon="menu",                                                    # |           |
+                click=cls.move_drawer,                      # handler           # |           |
+                drawer=drawer                               # object for handler# |           |
         )                                                                       # |           |
         jp.QToolbarTitle(a=toolbar, text="Instant Dictionary")                  # |           +- title
                                                                                 # |
@@ -48,7 +49,10 @@ class Home:
         return wp
 
     @staticmethod
-    def move_drawer(widget, msg):
-        widget.drawer.value = not widget.drawer.value
+    def move_drawer(
+            widget,                                                             # QBtn with drawer attribute
+            msg
+    ):
+        widget.drawer.value = not widget.drawer.value                           # toggle drawer state
 
 
