@@ -3,15 +3,7 @@ import justpy as jp
 
 class Home:
     path = '/'
-
-    @classmethod
-    def serve(cls, request):
-        wp = jp.QuasarPage(tailwind=True)                                       # enable tailwind css support
-        div = jp.Div(a=wp, classes='bg-gray-200 h-screen')                      # gray # full screen
-        jp.Div(a=div, text='This is the home page!', classes='text-4xl m-2')    # large text # margin: 2
-        jp.Div(
-            a=div,
-            text="""
+    loremipsum = """
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium 
             doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore 
             veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
@@ -24,13 +16,33 @@ class Home:
             suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? 
             Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam 
             nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-            """,
+            """
+
+    @classmethod
+    def serve(cls, request):
+        wp = jp.QuasarPage(tailwind=True)                                       # enable tailwind css support
+
+        layout = jp.QLayout(a=wp, view='hHh lpR fFf')                           # copied from examples/quasar-layout.html
+        header = jp.QHeader(a=layout)
+        toolbar = jp.QToolbar(a=header)
+        drawer = jp.QDrawer(a=layout, show_if_above=True, v_model="left",
+                            bordered=True)
+        jp.QBtn(a=toolbar, dense=True, flat=True, round=True,
+                icon="menu", click=cls.move_drawer, drawer=drawer)
+        jp.QToolbarTitle(a=toolbar, text="Instant Dictionary")
+        container = jp.QPageContainer(a=layout)
+
+        div = jp.Div(a=container, classes='bg-gray-200 h-screen')                      # gray # full screen
+        jp.Div(a=div, text='This is the home page!', classes='text-4xl m-2')    # large text # margin: 2
+        jp.Div(
+            a=div,
+            text=cls.loremipsum,
             classes='text-lg'
         )
-
         return wp
 
+    @staticmethod
+    def move_drawer(widget, msg):
+        widget.drawer.value = not widget.drawer.value
 
-# jp.Route(Home.path, Home.serve)
-# jp.justpy(port=8001)
 
