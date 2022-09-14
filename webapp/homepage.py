@@ -21,24 +21,30 @@ class Home:
     @classmethod
     def serve(cls, request):
         wp = jp.QuasarPage(tailwind=True)                                       # enable tailwind css support
-
-        layout = jp.QLayout(a=wp, view='hHh lpR fFf')                           # copied from examples/quasar-layout.html
-        header = jp.QHeader(a=layout)
-        toolbar = jp.QToolbar(a=header)
-        drawer = jp.QDrawer(a=layout, show_if_above=True, v_model="left",
-                            bordered=True)
-        jp.QBtn(a=toolbar, dense=True, flat=True, round=True,
-                icon="menu", click=cls.move_drawer, drawer=drawer)
-        jp.QToolbarTitle(a=toolbar, text="Instant Dictionary")
-        container = jp.QPageContainer(a=layout)
-
-        div = jp.Div(a=container, classes='bg-gray-200 h-screen')                      # gray # full screen
-        jp.Div(a=div, text='This is the home page!', classes='text-4xl m-2')    # large text # margin: 2
-        jp.Div(
-            a=div,
-            text=cls.loremipsum,
-            classes='text-lg'
-        )
+        ########################################################################
+        # copied from examples/quasar-layout.html
+        ########################################################################
+        layout = jp.QLayout(a=wp, view='hHh lpR fFf')                           # layout
+        header = jp.QHeader(a=layout)                                           # +- header
+        toolbar = jp.QToolbar(a=header)                                         # |    +- toolbar
+        drawer = jp.QDrawer(                                                    # +- drawer   |
+                            a=layout,                                           # |           |
+                            show_if_above=True,                                 # |           |
+                            v_model="left",                                     # |           |
+                            bordered=True                                       # |           |
+        )                                                                       # |           |
+        jp.QBtn(                                                                # |           +- button
+                a=toolbar,                                                      # |           |
+                dense=True, flat=True, round=True, icon="menu",                 # |           |
+                click=cls.move_drawer,                                          # |           |
+                drawer=drawer                                                   # |           |
+        )                                                                       # |           |
+        jp.QToolbarTitle(a=toolbar, text="Instant Dictionary")                  # |           +- title
+                                                                                # |
+        container = jp.QPageContainer(a=layout)                                 # +- container
+        div = jp.Div(a=container, classes='bg-gray-200 h-screen')               #       +- div
+        jp.Div(a=div, text='This is the home page!', classes='text-4xl m-2')    #           +- div
+        jp.Div(a=div, text=cls.loremipsum, classes='text-lg')                   #               +- div
         return wp
 
     @staticmethod
