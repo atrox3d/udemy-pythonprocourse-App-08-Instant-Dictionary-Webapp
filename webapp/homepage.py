@@ -35,9 +35,13 @@ class Home:
         )                                                                       # |    |                 |
         scroller = jp.QScrollArea(a=drawer, classes='fit')                      # |    +- scroll area    |
         qlist = jp.QList(a=scroller)                                            # |         +- list      |
-        jp.A(a=qlist, text='Home', href='/home')                                # |              +- a    |
-        jp.A(a=qlist, text='Dictionary', href='/dictionary')                    # |              +- a    |
-        jp.A(a=qlist, text='About', href='/about')                              # |              +- a    |
+        a_classes = 'p-2 m-2 text-lg text-blue-400 hover:text-blue-700'         # |              |       |
+        jp.A(a=qlist, text='Home', href='/', classes=a_classes)                 # |              +- a    |
+        jp.Br(a=qlist)                                                          # |              +- br   |
+        jp.A(a=qlist, text='Dictionary', href='/dictionary', classes=a_classes) # |              +- a    |
+        jp.Br(a=qlist)                                                          # |              +- br   |
+        jp.A(a=qlist, text='About', href='/about', classes=a_classes)           # |              +- a    |
+        jp.Br(a=qlist)                                                          # |              +- br   |
         jp.QBtn(                                                                # |                      +- button
                 a=toolbar,                                                      # |                      |
                 dense=True, flat=True, round=True,                              # |                      |
