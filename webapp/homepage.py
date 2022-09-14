@@ -26,21 +26,26 @@ class Home:
         ########################################################################
         layout = jp.QLayout(a=wp, view='hHh lpR fFf')                           # layout
         header = jp.QHeader(a=layout)                                           # +- header
-        toolbar = jp.QToolbar(a=header)                                         # |    +- toolbar
-        drawer = jp.QDrawer(                                                    # +- drawer   |
-                            a=layout,                                           # |           |
-                            show_if_above=True,                                 # |           |
-                            v_model="left",                                     # |           |
-                            bordered=True                                       # |           |
-        )                                                                       # |           |
-        jp.QBtn(                                                                # |           +- button
-                a=toolbar,                                                      # |           |
-                dense=True, flat=True, round=True,                              # |           |
-                icon="menu",                                                    # |           |
-                click=cls.move_drawer,                      # handler           # |           |
-                drawer=drawer                               # object for handler# |           |
-        )                                                                       # |           |
-        jp.QToolbarTitle(a=toolbar, text="Instant Dictionary")                  # |           +- title
+        toolbar = jp.QToolbar(a=header)                                         # |    +------------- toolbar
+        drawer = jp.QDrawer(                                                    # +- drawer              |
+                            a=layout,                                           # |    |                 |
+                            show_if_above=True,                                 # |    |                 |
+                            v_model="left",                                     # |    |                 |
+                            bordered=True                                       # |    |                 |
+        )                                                                       # |    |                 |
+        scroller = jp.QScrollArea(a=drawer, classes='fit')                      # |    +- scroll area    |
+        qlist = jp.QList(a=scroller)                                            # |         +- list      |
+        jp.A(a=qlist, text='Home', href='/home')                                # |              +- a    |
+        jp.A(a=qlist, text='Dictionary', href='/dictionary')                    # |              +- a    |
+        jp.A(a=qlist, text='About', href='/about')                              # |              +- a    |
+        jp.QBtn(                                                                # |                      +- button
+                a=toolbar,                                                      # |                      |
+                dense=True, flat=True, round=True,                              # |                      |
+                icon="menu",                                                    # |                      |
+                click=cls.move_drawer,                      # handler           # |                      |
+                drawer=drawer                               # object for hndler # |                      |
+        )                                                                       # |                      |
+        jp.QToolbarTitle(a=toolbar, text="Instant Dictionary")                  # |                      +- title
                                                                                 # |
         container = jp.QPageContainer(a=layout)                                 # +- container
         div = jp.Div(a=container, classes='bg-gray-200 h-screen')               #       +- div
