@@ -7,19 +7,8 @@ class Home:
     @classmethod
     def serve(cls, request):
         wp = jp.QuasarPage(tailwind=True)                                       # enable tailwind css support
-
-        div = jp.Div(
-            a=wp,
-            classes='bg-gray-200 h-screen'
-        )
-
-        jp.Div(
-            a=div,
-            text='This is the home page!',
-            classes='text-4xl '                                                 # large text
-                    'm-2'                                                       # margin: 2
-        )
-
+        div = jp.Div(a=wp, classes='bg-gray-200 h-screen')                      # gray # full screen
+        jp.Div(a=div, text='This is the home page!', classes='text-4xl m-2')    # large text # margin: 2
         jp.Div(
             a=div,
             text="""
