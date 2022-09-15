@@ -1,4 +1,5 @@
 import justpy as jp
+from webapp import layout
 
 
 class Home:
@@ -21,47 +22,24 @@ class Home:
     @classmethod
     def serve(cls, request):
         wp = jp.QuasarPage(tailwind=True)                                       # enable tailwind css support
-        ########################################################################
-        # copied from examples/quasar-layout.html
-        ########################################################################
-        layout = jp.QLayout(a=wp, view='hHh lpR fFf')                           # layout
-        header = jp.QHeader(a=layout)                                           # +- header
-        toolbar = jp.QToolbar(a=header)                                         # |    +------------- toolbar
-        drawer = jp.QDrawer(                                                    # +- drawer              |
-                            a=layout,                                           # |    |                 |
-                            show_if_above=True,                                 # |    |                 |
-                            v_model="left",                                     # |    |                 |
-                            bordered=True                                       # |    |                 |
-        )                                                                       # |    |                 |
-        scroller = jp.QScrollArea(a=drawer, classes='fit')                      # |    +- scroll area    |
-        qlist = jp.QList(a=scroller)                                            # |         +- list      |
-        a_classes = 'p-2 m-2 text-lg text-blue-400 hover:text-blue-700'         # |              |       |
-        jp.A(a=qlist, text='Home', href='/', classes=a_classes)                 # |              +- a    |
-        jp.Br(a=qlist)                                                          # |              +- br   |
-        jp.A(a=qlist, text='Dictionary', href='/dictionary', classes=a_classes) # |              +- a    |
-        jp.Br(a=qlist)                                                          # |              +- br   |
-        jp.A(a=qlist, text='About', href='/about', classes=a_classes)           # |              +- a    |
-        jp.Br(a=qlist)                                                          # |              +- br   |
-        jp.QBtn(                                                                # |                      +- button
-                a=toolbar,                                                      # |                      |
-                dense=True, flat=True, round=True,                              # |                      |
-                icon="menu",                                                    # |                      |
-                click=cls.move_drawer,                      # handler           # |                      |
-                drawer=drawer                               # object for hndler # |                      |
-        )                                                                       # |                      |
-        jp.QToolbarTitle(a=toolbar, text="Instant Dictionary")                  # |                      +- title
+
+        lay = layout.DefaultLayout(a=wp, view='hHh lpR fFf')                    # layout
                                                                                 # |
-        container = jp.QPageContainer(a=layout)                                 # +- container
+        container = jp.QPageContainer(a=lay)                                    # +- container
+                                                                                #       |
         div = jp.Div(a=container, classes='bg-gray-200 h-screen')               #       +- div
         jp.Div(a=div, text='This is the home page!', classes='text-4xl m-2')    #           +- div
         jp.Div(a=div, text=cls.loremipsum, classes='text-lg')                   #               +- div
         return wp
 
-    @staticmethod
-    def move_drawer(
-            widget,                                                             # QBtn with drawer attribute
-            msg
-    ):
-        widget.drawer.value = not widget.drawer.value                           # toggle drawer state
+    """
+    this method has been moved to layout.DefaultLayout
+    """
+    # @staticmethod
+    # def move_drawer(
+    #         widget,                                                             # QBtn with drawer attribute
+    #         msg
+    # ):
+    #     widget.drawer.value = not widget.drawer.value                           # toggle drawer state
 
 
