@@ -1,7 +1,7 @@
 import justpy as jp
 
-from webapp.aboutpage import About
-from webapp.homepage import Home
+from webapp.about import About
+from webapp.home import Home
 from webapp.dictionary import Dictionary
 
 jp.Route(Home.path, Home.serve)
