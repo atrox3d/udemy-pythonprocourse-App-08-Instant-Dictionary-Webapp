@@ -1,4 +1,6 @@
 import justpy as jp
+import requests
+
 import definition
 from webapp import layout
 from webapp import page
@@ -67,9 +69,23 @@ class Dictionary(page.Page):
     Either way it doesnt work so we need to use @staticmethod to treat the method as a function
     """
     @staticmethod
-    def get_definition(widget, msg):                                            # button click handler
-        defined = definition.Definition(widget.value)                           # get definition of input box
-        widget.outputdiv.text = " | ".join(defined.get())                       # write definition on output div
+    def get_definition(                                                          # button click handler
+            widget,
+            msg,
+            use_api=True,
+            url='http://127.0.0.1:8000/api?w='
+    ):
+        if use_api:
+            print(f'using api: {url}{widget.value}')
+            response = requests.get(f'{url}{widget.value}')
+            data = response.json()['definition']
+        else:
+            print(f'using local class Definition')
+            defined = definition.Definition(widget.value)                       # get definition of input box
+            data = defined.get()
+
+        print(type(data))
+        widget.outputdiv.text = " | ".join(data)                       # write definition on output div
 
 
 
