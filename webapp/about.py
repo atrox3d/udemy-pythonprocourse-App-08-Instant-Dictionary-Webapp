@@ -1,8 +1,12 @@
 import justpy as jp
 from webapp import layout
+from webapp import page
 
 
-class About:
+class About(page.Page):
+    """
+    About is a concrete class of page.Page
+    """
     path = '/about'
     loremipsum = """
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium 

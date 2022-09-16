@@ -1,9 +1,13 @@
 import justpy as jp
 import definition
 from webapp import layout
+from webapp import page
 
 
-class Dictionary:
+class Dictionary(page.Page):
+    """
+    Dictionary is a concrete class of page.Page
+    """
     path = '/dictionary'
 
     """
