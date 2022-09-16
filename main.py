@@ -3,9 +3,9 @@ import inspect
 import justpy as jp
 
 from webapp import page
-from webapp.about import About
-from webapp.home import Home
-from webapp.dictionary import Dictionary
+# from webapp.about import About
+# from webapp.home import Home
+# from webapp.dictionary import Dictionary
 
 # """
 # Abstract Classes: first test and error
