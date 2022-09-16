@@ -1,5 +1,6 @@
 import justpy as jp
 import definition
+from webapp import layout
 
 
 class Dictionary:
@@ -16,7 +17,12 @@ class Dictionary:
     @classmethod                                                                # called from Dictionary.serve, no self
     def serve(cls, request):                                                    # so request doesnt go to 1st param
         wp = jp.QuasarPage(tailwind=True)                                       # enable tailwind css support
-        div = jp.Div(a=wp, classes='bg-gray-200 h-screen')
+
+        lay = layout.DefaultLayout(a=wp)                                        # layout
+                                                                                # |
+        container = jp.QPageContainer(a=lay)                                    # +- container
+
+        div = jp.Div(a=container, classes='bg-gray-200 h-screen')
         jp.Div(a=div, text='Instant English Dictionary', classes='text-4xl m-2')
 
         jp.Div(

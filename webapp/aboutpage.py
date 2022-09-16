@@ -1,28 +1,10 @@
 import justpy as jp
+from webapp import layout
 
 
 class About:
     path = '/about'
-
-    @classmethod
-    def serve(cls, request):
-        wp = jp.QuasarPage(tailwind=True)                                       # enable tailwind css support
-
-        div = jp.Div(
-            a=wp,
-            classes='bg-gray-200 h-screen'
-        )
-
-        jp.Div(
-            a=div,
-            text='This is the about page!',
-            classes='text-4xl '                                                 # large text
-                    'm-2'                                                       # margin: 2
-        )
-
-        jp.Div(
-            a=div,
-            text="""
+    loremipsum = """
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium 
             doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore 
             veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
@@ -35,9 +17,19 @@ class About:
             suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? 
             Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam 
             nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-            """,
-            classes='text-lg'
-        )
+            """
+
+    @classmethod
+    def serve(cls, request):
+        wp = jp.QuasarPage(tailwind=True)                                       # enable tailwind css support
+
+        lay = layout.DefaultLayout(a=wp)                                        # layout
+                                                                                # |
+        container = jp.QPageContainer(a=lay)                                    # +- container
+                                                                                #       |
+        div = jp.Div(a=container, classes='bg-gray-200 h-screen')               #       +- div
+        jp.Div(a=div, text='This is the About page!', classes='text-4xl m-2')   #           +- div
+        jp.Div(a=div, text=cls.loremipsum, classes='text-lg')                   #               +- div
 
         return wp
 

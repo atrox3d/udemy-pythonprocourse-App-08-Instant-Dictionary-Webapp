@@ -3,10 +3,10 @@ import justpy as jp
 
 class DefaultLayout(jp.QLayout):
 
-    def __init__(self, **kwargs):                           # kwargs = {
-        super().__init__(**kwargs)                          #           a:wp,
-                                                            #           view: 'hHh lpR fFf'
-                                                            # }
+    def __init__(self, view='hHh lpR fFf', **kwargs):                           # kwargs = {
+        super().__init__(view=view, **kwargs)                                   #           a:wp,
+                                                                                #           view: 'hHh lpR fFf'
+                                                                                # }
         ########################################################################
         # structure copied from examples/quasar-layout.html
         ########################################################################
@@ -20,10 +20,10 @@ class DefaultLayout(jp.QLayout):
         kwargs = {a: wp, view: 'hHh lpR fFf')
         """
         # layout = jp.QLayout(a=wp, view='hHh lpR fFf')                           # layout
-        header = jp.QHeader(a=self)                                           # +- header
+        header = jp.QHeader(a=self)                                             # +- header
         toolbar = jp.QToolbar(a=header)                                         # |    +------------- toolbar
         drawer = jp.QDrawer(                                                    # +- drawer              |
-                            a=self,                                           # |    |                 |
+                            a=self,                                             # |    |                 |
                             show_if_above=True,                                 # |    |                 |
                             v_model="left",                                     # |    |                 |
                             bordered=True                                       # |    |                 |

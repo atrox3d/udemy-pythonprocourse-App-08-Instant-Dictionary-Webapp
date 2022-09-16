@@ -23,13 +23,14 @@ class Home:
     def serve(cls, request):
         wp = jp.QuasarPage(tailwind=True)                                       # enable tailwind css support
 
-        lay = layout.DefaultLayout(a=wp, view='hHh lpR fFf')                    # layout
+        lay = layout.DefaultLayout(a=wp)                                        # layout
                                                                                 # |
         container = jp.QPageContainer(a=lay)                                    # +- container
                                                                                 #       |
         div = jp.Div(a=container, classes='bg-gray-200 h-screen')               #       +- div
         jp.Div(a=div, text='This is the home page!', classes='text-4xl m-2')    #           +- div
         jp.Div(a=div, text=cls.loremipsum, classes='text-lg')                   #               +- div
+
         return wp
 
     """
