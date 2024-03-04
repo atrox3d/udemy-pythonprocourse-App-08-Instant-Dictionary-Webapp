@@ -4,3 +4,5 @@
 /secret/
 /files/
 /examples/*.jpeg
+
+__pycache__
