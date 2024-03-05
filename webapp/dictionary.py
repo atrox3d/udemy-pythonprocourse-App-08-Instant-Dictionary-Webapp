@@ -77,8 +77,16 @@ class Dictionary(page.Page):
     ):
         if use_api:
             print(f'using api: {url}{widget.value}')
-            response = requests.get(f'{url}{widget.value}')
-            data = response.json()['definition']
+            try:
+                response = requests.get(f'{url}{widget.value}')
+                # response.raise_for_status()
+                print(response)
+                print(response.status_code)
+                data = response.json()['definition']
+            except requests.exceptions.ConnectionError as e:
+                # print(type(e), e)
+                data = ('connection error',)
+                print(data)
         else:
             print(f'using local class Definition')
             defined = definition.Definition(widget.value)                       # get definition of input box
